@@ -4,8 +4,6 @@ import SearchResults from '../SearchResults/SearchResults'
 import data from '../../util/data';
 import SearchBar from '../SearchBar/SearchBar'
 import Playlist from '../Playlist/Playlist'
-import Track from '../Track/Track';
-import TrackList from '../TrackList/TrackList';
 
 const temp = [{
   id: "419FKwHtnB2To6cQHVchaR",
@@ -33,13 +31,21 @@ function App() {
   const [searchResults, setSearchResults] = useState(data)
   const [playlistName, setPlaylistName] = useState('MyPlaylist');
   const [playlistTracks, setPlaylistTracks] = useState(temp);
+
+  const addTrack = (track) => {
+    if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    } else {
+      setPlaylistTracks([track, ...playlistTracks])
+    }
+  }
   return (
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App" >
         <SearchBar />
         < div className="App-playlist" >
-          <SearchResults searchResults={searchResults} />
+          <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistName={playlistName} playlistTracks={playlistTracks} />
         </div >
       </div >

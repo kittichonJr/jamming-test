@@ -1,19 +1,25 @@
-import { useState } from 'react'
 import './Track.css'
 
 function Track(props) {
-    const [isRemoval, setIsRemoval] = useState(false)
-    const { name, artist, album } = props.track
+    const { track, isRemoval, onAdd } = props
+    const { name, artist, album } = track
+
+    const addTrack = () => {
+        onAdd(track)
+    }
+
     return (
         <div className="Track">
             <div className="Track-information">
                 <h3>{name}</h3>
                 <p>{artist} | {album}</p>
             </div>
-            <button className="Track-action">
-                {isRemoval ? '-' : '+'}
-                {/*<!-- + or - will go here -->*/}
-            </button>
+            {isRemoval ||
+                <button className="Track-action" onClick={addTrack}>+</button>
+            }
+            {isRemoval &&
+                <button className="Track-action">-</button>
+            }
         </div>
     )
 }
