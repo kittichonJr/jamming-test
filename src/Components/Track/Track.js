@@ -1,7 +1,8 @@
 import "./Track.css";
+import PropTypes from 'prop-types';
 
 function Track(props) {
-    const { track, isRemoval, onAdd, onRemove } = props;
+    const { track, isRemoval, onAdd, onRemove, } = props;
     const { name, artist, album } = track;
 
     const addTrack = () => {
@@ -18,6 +19,7 @@ function Track(props) {
                     {artist} | {album}
                 </p>
             </div>
+
             {isRemoval ? (
                 ""
             ) : (
@@ -25,6 +27,7 @@ function Track(props) {
                     +
                 </button>
             )}
+
             {isRemoval ? (
                 <button className="Track-action" onClick={removeTrack}>
                     -
@@ -32,8 +35,17 @@ function Track(props) {
             ) : (
                 ""
             )}
+
         </div>
     );
+}
+
+Track.propTypes = {
+    track: PropTypes.object.isRequired,
+    onAdd: PropTypes.func,
+    onRemove: PropTypes.func,
+    isRemoval: PropTypes.bool.isRequired,
+    optional: PropTypes.string
 }
 
 export default Track;
