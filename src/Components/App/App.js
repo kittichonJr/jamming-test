@@ -4,6 +4,7 @@ import SearchResults from "../SearchResults/SearchResults";
 import data from "../../util/data";
 import SearchBar from "../SearchBar/SearchBar";
 import Playlist from "../Playlist/Playlist";
+import Spotify from "../../util/Spotify";
 
 const temp = [
   {
@@ -55,8 +56,12 @@ function App() {
     console.log(trackURIs);
   }
   const search = (search) => {
-    console.log(search);
+    Spotify.search(search)
+      .then(res => setSearchResults(res))
   }
+
+
+
   return (
     <div>
       <h1>
