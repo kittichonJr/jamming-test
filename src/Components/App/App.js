@@ -31,9 +31,9 @@ const temp = [
 ];
 
 function App() {
-  const [searchResults, setSearchResults] = useState(data);
+  const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("NewPlaylist");
-  const [playlistTracks, setPlaylistTracks] = useState(temp);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
   useEffect(() => {
     Spotify.getAccessToken()
@@ -56,7 +56,9 @@ function App() {
   };
   const savePlaylist = () => {
     const trackURIs = playlistTracks.map(track => track.uri)
-    console.log(trackURIs);
+    Spotify.savePlayList(playlistName, trackURIs);
+    setPlaylistName('NewPlaylist')
+    setPlaylistTracks([])
   }
   const search = (search) => {
     Spotify.search(search)
